@@ -6,10 +6,15 @@ public class Driver
 	{
 		Graph graph = new Graph(4);
 		
-		Node s1 = new Node(new Double(0), 0d);
-		Node s2 = new Node(new Double(0), 0d);
-		Node s3 = new Node(new Double(1), 0d);
-		Node s4 = new Node(new Double(0), 0d);
+		Node s1 = new Node(0, new Double(0), 0d);
+		Node s2 = new Node(1, new Double(0), 0d);
+		Node s3 = new Node(2, new Double(1), 0d);
+		Node s4 = new Node(3, new Double(0), 0d);
+		
+		s1.reward = 0.0;
+		s2.reward = 0.0;
+		s3.reward = 1.0;
+		s4.reward = 0.0;
 		
 		s1.addAction(new Node[]{s1, s2}, new Double[]{0.2, 0.8});
 		s1.addAction(new Node[]{s1, s4}, new Double[]{0.2, 0.8});
@@ -24,6 +29,13 @@ public class Driver
 		graph.addNode(s2);
 		graph.addNode(s3);
 		graph.addNode(s4);
+		
+		graph.initUtility(.1d, .1, graph.map.length*graph.map.length);
+		
+		for(Node node : graph.map)
+		{
+			System.out.println("Node: " + node.id + " Utility: " + node.util);
+		}
 	}
 	public static void main(String[] args)
 	{
