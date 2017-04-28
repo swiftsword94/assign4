@@ -8,7 +8,7 @@ public class Driver
 		
 		Node s1 = new Node(0, new Double(0), 0d);
 		Node s2 = new Node(1, new Double(0), 0d);
-		Node s3 = new Node(2, new Double(1), 0d);
+		Node s3 = new Node(2, new Double(1), 1d);
 		Node s4 = new Node(3, new Double(0), 0d);
 		
 		s1.reward = 0.0;
@@ -30,12 +30,9 @@ public class Driver
 		graph.addNode(s3);
 		graph.addNode(s4);
 		
-		graph.initUtility(.1d, .1, graph.map.length*graph.map.length);
-		
-		for(Node node : graph.map)
-		{
-			System.out.println("Node: " + node.id + " Utility: " + node.util);
-		}
+		graph.initUtility(.001d, .0000001d, graph.map.length*graph.map.length);
+		System.out.println("FINAL: ");
+		graph.printUtil(graph.map);
 	}
 	public static void main(String[] args)
 	{

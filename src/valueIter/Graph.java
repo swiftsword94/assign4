@@ -63,9 +63,16 @@ public class Graph
 	{
 		Double maxChange = 0.0;
 		Double[] utility = new Double[map.length];
+		int iteration = 0;
+		for(int i = 0; i < utility.length; i++)
+		{
+			utility[i] = 0d;
+		}
 		//until the maximum change in training is less than a percentage of the maximum error
 		do
 		{
+			System.out.println("Iteration: " + iteration++);
+			printUtil(utility);
 			//for all the nodes in the graph
 			for(int nodeIndex = 0; nodeIndex < map.length; nodeIndex++)
 			{
@@ -82,7 +89,7 @@ public class Graph
 					while(outcomeIter.hasNext())
 					{
 						Node destination = outcomeIter.next();
-						tmp2 += action.outcome.get(destination) * getUtility(destination, discount, --depth);
+						tmp2 += action.outcome.get(destination) * utility[destination.id];
 						if(tmp < tmp2)
 						{
 							tmp = tmp2;
@@ -106,5 +113,20 @@ public class Graph
 		}
 		
 		return utility;
+	}
+	
+	public void printUtil(Node[] map)
+	{
+		for(Node node : map)
+		{
+			System.out.println("Node: " + node.id + " Utility: " + node.util);
+		}
+	}
+	public void printUtil(Double[] map)
+	{
+		for(int i = 0; i < map.length; i++)
+		{
+			System.out.println("Node: " + i + " Utility: " + map[i]);
+		}
 	}
 }
