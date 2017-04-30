@@ -70,13 +70,15 @@ public class Graph
 		//until the maximum change in training is less than a percentage of the maximum error
 		do
 		{
+			maxChange = 0.0;
 			System.out.println("\nIteration: " + iteration++);
 			//printUtil(utility);
 			//for all the nodes in the graph
 			for(int nodeIndex = 0; nodeIndex < map.length; nodeIndex++)
 			{
 				Node nextNode = map[nodeIndex];
-				Double tmp = 0.0;
+				Double actOfMaxUtility = 0.0;//stores value of the action with the max utility available to nextNode
+				Double nextUtility = 0.0;
 				Action action = null;
 				//for all the actions available to nextNode
 				for(int actionIndex = 0; actionIndex < nextNode.act.size(); actionIndex++)
@@ -90,27 +92,29 @@ public class Graph
 						Node destination = outcomeIter.next();
 						tmp2 += action.outcome.get(destination) * utility[destination.id];
 					}
-					if(tmp < tmp2)
+					if(actOfMaxUtility < tmp2)
 					{
-						tmp = tmp2;
+						actOfMaxUtility = tmp2;
 					}
 				}
+				/*
 				System.out.println("Node number: " + nextNode.id);
 				System.out.println("nextNode.reward: " + nextNode.reward);
-				System.out.println("tmp: " + tmp);
+				System.out.println("actOfMaxUtility: " + actOfMaxUtility);
 				System.out.println("Utility: " + utility[nodeIndex]);
+				*/
+				nextUtility = nextNode.reward + discount * actOfMaxUtility;
 				//store the maximum utility
-				if(Math.abs(nextNode.reward + discount * tmp - utility[nodeIndex]) < maxChange)
+				if(Math.abs( nextUtility - utility[nodeIndex]) > maxChange)
 				{
-					System.out.println("maxChange: " + maxChange);
-					maxChange = tmp;
+					System.out.println("maxChanged  Changed! maxChange: " + maxChange);
+					maxChange = nextUtility - utility[nodeIndex];
 				}
-				utility[nodeIndex] = nextNode.reward + discount * tmp;
-				//find the maximum
+				utility[nodeIndex] = nextUtility;
 			}
+			System.out.println("\n\nConditions:\n\tmaxChange: "+maxChange+"\n\tmaxError * (1 - discount) / discount : "+(maxError * (1 - discount) / discount)+"\n\t pass?: "+(maxChange >= maxError * (1 - discount) / discount));
 		}
-		while(maxChange < maxError * (1-discount)/discount );
-		
+		while(maxChange >= maxError * (1 - discount) / discount );
 		for(int i = 0; i < this.map.length; i++)
 		{
 			map[i].util = utility[i]; 

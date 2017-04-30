@@ -30,7 +30,7 @@ public class Driver
 		graph.addNode(s3);
 		graph.addNode(s4);
 		
-		graph.initUtility(.1d, .3d);
+		graph.initUtility(.9d, .000000000000001d);
 		System.out.println("FINAL: ");
 		graph.printUtil(graph.map);
 	}
