@@ -56,23 +56,22 @@ public class Graph
 	 * if the depth is set to a negative number then it will compute until all routes to a terminating state is reached 
 	 * @param discount
 	 * @param maxError
-	 * @param depth
 	 * @return Double[] containing an array of utilities
 	 */
-	public Double[] initUtility(Double discount, Double maxError, int depth)
+	public Double[] initUtility(Double discount, Double maxError)
 	{
 		Double maxChange = 0.0;
 		Double[] utility = new Double[map.length];
 		int iteration = 0;
 		for(int i = 0; i < utility.length; i++)
 		{
-			utility[i] = 0d;
+			utility[i] = map[i].reward;
 		}
 		//until the maximum change in training is less than a percentage of the maximum error
 		do
 		{
-			System.out.println("Iteration: " + iteration++);
-			printUtil(utility);
+			System.out.println("\nIteration: " + iteration++);
+			//printUtil(utility);
 			//for all the nodes in the graph
 			for(int nodeIndex = 0; nodeIndex < map.length; nodeIndex++)
 			{
@@ -90,19 +89,24 @@ public class Graph
 					{
 						Node destination = outcomeIter.next();
 						tmp2 += action.outcome.get(destination) * utility[destination.id];
-						if(tmp < tmp2)
-						{
-							tmp = tmp2;
-						}
+					}
+					if(tmp < tmp2)
+					{
+						tmp = tmp2;
 					}
 				}
+				System.out.println("Node number: " + nextNode.id);
+				System.out.println("nextNode.reward: " + nextNode.reward);
+				System.out.println("tmp: " + tmp);
+				System.out.println("Utility: " + utility[nodeIndex]);
 				//store the maximum utility
-				utility[nodeIndex] = nextNode.reward + tmp;
-				//find the maximum
-				if(Math.abs(tmp - utility[nodeIndex]) > maxChange)
+				if(Math.abs(nextNode.reward + discount * tmp - utility[nodeIndex]) < maxChange)
 				{
+					System.out.println("maxChange: " + maxChange);
 					maxChange = tmp;
 				}
+				utility[nodeIndex] = nextNode.reward + discount * tmp;
+				//find the maximum
 			}
 		}
 		while(maxChange < maxError * (1-discount)/discount );
