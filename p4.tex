@@ -17,6 +17,80 @@
 \begin{flushleft}
 
 \section*{Question 1:}
+Note: States are referred by their index rather than their state number.\linebreak
+Iteration: 0
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Node &	Utility \\ \hline
+0 &	0.0 \\ \hline
+1 &	0.0 \\ \hline
+2 &	1.0 \\ \hline
+3 &	0.0 \\ \hline
+\end{tabular}
+\end{center}
+
+Iteration: 1
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Action & Node &	Utility \\ \hline
+2 & 0 &	0.0 \\ \hline
+2 & 1 &	0.7200000000000001 \\ \hline
+3 & 2 &	1.6480000000000001 \\ \hline
+1 & 3 &	1.33488 \\ \hline
+\end{tabular}
+\end{center}
+
+Iteration: 5
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Action & Node &	Utility \\ \hline
+2 & 0 &	2.337017421689511 \\ \hline
+2 & 1 &	2.6655934354214406 \\ \hline
+3 & 2 &	3.4750243795365288 \\ \hline
+1 & 3 &	3.0622721853782413 \\ \hline
+\end{tabular}
+\end{center}
+
+Iteration: 15
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Action & Node &	Utility \\ \hline
+2 & 0 &	3.713231422293591 \\ \hline
+2 & 1 &	4.176962967443245 \\ \hline
+3 & 2 &	4.816810731150936 \\ \hline
+1 & 3 &	4.283297765347352 \\ \hline
+\end{tabular}
+\end{center}
+
+Iteration: 60
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Action & Node &	Utility \\ \hline
+2 & 0 &	3.929362496465146 \\ \hline
+2 & 1 &	4.414469642322995 \\ \hline
+3 & 2 &	5.027597905122635 \\ \hline
+1 & 3 &	4.475114093661598 \\ \hline
+\end{tabular}
+\end{center}
+
+Iteration: 150
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Action & Node &	Utility \\ \hline
+2 & 0 &	3.9293895701383725 \\ \hline
+2 & 1 &	4.414499393612255 \\ \hline
+3 & 2 &	5.027624309391853 \\ \hline
+1 & 3 &	4.4751381215465855 \\ \hline
+\end{tabular}
+\end{center}
+
+The implementation used to code value iteration was the Bellman equation. The equation iteratively updates the utility of a node via the maximum of the utility of the best available actions. This value is then discounted and added to the reward before being stored as the next iteration's utility value. The convergence criteria was comparing the maximum change in utility of the current iteration to a maximum error multiplied by the complement of the discount factor expressed in terms of the discount factor. This is essentially to keep iterating until we reach some level of precision in terms of converging with the actual utility. When value iteration is called on the graph with the arguments discount = 0.9, and maxError = .000000000000001, the method iterates 177 times until it reaches convergence. Increasing the discount factor increases the number of iterations needed to reach convergence, and increasing the maximum error allowed deceases the number of iterations needed to reach convergence. The time it takes to call the function on a computer with a CPU: i7-4770k will be around 2 milliseconds for 177 iteration when nothing is printed to the terminal.
 
 \section*{Question 2:}
 \subsection*{a}
