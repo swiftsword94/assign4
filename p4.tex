@@ -101,11 +101,27 @@ The implementation used to code value iteration was the Bellman equation. The eq
 
 \section*{Question 3:}
 \subsection*{a}
-
+Positive class: \\
+$[-1\quad3]^T ,[0\quad2]^T ,[0\quad1]^T ,[0\quad0]^T $\\
+Negative class: \\
+$[1\quad5]^T ,[1\quad6]^T ,[3\quad3]^T $\\
+Maximum margin linear classifier:\\
+\includegraphics[]{q3_1.png}
 \subsection*{b}
-
+Linear svm is parameterized by $h(x)=w^t x+b$\\
+$w=-2.5$\\
+$b=4.5$\\
+ $h(x)=-2.5^t x+4.5$\\
 \subsection*{c}
-
+Positive class: \\
+$[-1\quad3]^T ,[0\quad2]^T ,[0\quad1]^T ,[0\quad0]^T ,[-2\quad0]^T ,[-2\quad1]^T ,[-2\quad3]^T ,[-1\quad0]^T ,[-1\quad1]^T ,[0\quad0]^T$\\
+Negative class: \\
+$[1\quad5]^T ,[1\quad6]^T ,[3\quad3]^T $\\
+Maximum margin linear classifier:\\
+\includegraphics[]{q3_2.png} \\
+$w=-1.7$\\
+$b=4.4$\\
+ $h(x)=-1.7^t x+4.4$\\
 \section*{Question 4:}
 \subsection*{a}
 Constant offset = 1\\
@@ -176,8 +192,8 @@ The error for this input space separation is 0 because all of the inputs are cor
 The minimum error that can be reached with a single perceptron for this classification task is 2, which means 2 points will be classified incorrectly no matter how much learning the perceptron does.\\
 \includegraphics[]{q5_line_1.png} \\
 \subsection*{b}
-To correctly classify all of these point, we need at least 3 linear separators and one node in the next layer to combine the output of those 3 linear separators. This final node accepts the last two perceptrons as given before inverting the third one' class to be 1. Thus a positive signal will be output only when the first perception returns a class -1 and the last two return a class 1.
-the linear separator is given in the form of $w_{1}*x_{1}+w_{2}*x_{2}+w_{3}*x_{3}=0$
+To correctly classify all of these points, we need at least 3 linear separators and one node in the next layer to combine the output of those 3 linear separators. This final node accepts the last two perceptrons as given before inverting the third one's class to be 1. A positive signal will be the output only when the first perception returns a class -1, and the last two return a class 1.
+The linear separator is given in the form of $w_{1}*x_{1}+w_{2}*x_{2}+w_{3}*x_{3}=0$
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
